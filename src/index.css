@@ -4,9 +4,7 @@ body {
   font-family: sans-serif;
 }
 
-.list-group-item {
-  border: #999 solid 1px;
-  border-radius: 3px;
-  padding: 10px;
-  margin: 10px;
+form a {
+  margin-left: 5px;
 }
+

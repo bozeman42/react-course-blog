@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchPosts } from '../actions';
-
+import Post from './post';
 class PostsIndex extends Component {
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchPosts();
 
   }
@@ -13,9 +13,7 @@ class PostsIndex extends Component {
   renderPosts() {
     const posts = Object.keys(this.props.posts).map((key) => {
       return (
-        <li key={key} className="list-group-item">
-          {this.props.posts[key].title}
-        </li>
+        <Post key={key} post={this.props.posts[key]} />
       );
     })
     console.log(posts);
@@ -25,14 +23,13 @@ class PostsIndex extends Component {
   render() {
     return (
       <div>
-        <div className="text-xs-right">
+        <div className="text-right">
           <Link className="btn btn-primary" to="/posts/new">
-            {/* <button>Post</button> */}
-            Post
+            Add a Post
           </Link>
         </div>
         <h3>Posts</h3>
-        <ul>
+        <ul className="list-group">
           {this.renderPosts()}
         </ul>
       </div>
