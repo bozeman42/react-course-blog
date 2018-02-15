@@ -3,6 +3,7 @@ export const FETCH_POSTS = "FETCH_POSTS";
 export const FETCH_POST = "FETCH_POST";
 export const CREATE_POST = "CREATE_POST";
 export const DELETE_POST = "DELETE_POST";
+export const FETCH_TOO_MUCH = "FETCH_TOO_MUCH";
 
 const ROOT_URL = 'http://reduxblog.herokuapp.com/api';
 const API_KEY = '?key=aaronkl';
@@ -38,5 +39,13 @@ export function deletePost(id,callback) {
   return {
     type: DELETE_POST,
     payload: id
+  }
+}
+
+export function fetchTooMuch(){
+  const request = axios.get('/toomuch');
+  return {
+    type: FETCH_TOO_MUCH,
+    payload: request
   }
 }

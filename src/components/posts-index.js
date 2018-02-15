@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchPosts } from '../actions';
+import { fetchPosts, fetchTooMuch } from '../actions';
 import Post from './post';
 class PostsIndex extends Component {
 
   componentWillMount() {
     this.props.fetchPosts();
-
+    this.props.fetchTooMuch();
   }
 
   renderPosts() {
+    const {howmuch} = this.props;
     const posts = Object.keys(this.props.posts).map((key) => {
       return (
-        <Post key={key} post={this.props.posts[key]} />
+        <div>
+          {howmuch}
+          <Post key={key} post={this.props.posts[key]} />
+        </div>
       );
     })
     console.log(posts);
+    console.log('howmuch?',this.props.howmuch);
     return posts;
   }
 
@@ -39,7 +44,10 @@ class PostsIndex extends Component {
 }
 
 function mapStateToProps(state) {
-  return { posts: state.posts };
+  return {
+    posts: state.posts,
+    howmuch: state.howmuch
+  };
 }
 
-export default connect(mapStateToProps, { fetchPosts })(PostsIndex);
+export default connect(mapStateToProps, { fetchPosts, fetchTooMuch })(PostsIndex);
